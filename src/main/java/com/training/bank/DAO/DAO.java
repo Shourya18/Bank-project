@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.training.bank.model.Account;
 import com.training.bank.model.Customer;
 import com.training.bank.model.Transaction;
+import com.training.bank.model.Withdraw;
 
 @Repository
 public class DAO {
@@ -111,8 +112,21 @@ public class DAO {
 		}
 		
 		return oldAccount;
-		
-		
-		
+	}
+	@Transactional
+	public Account withdraw(Account account) {
+		Session session = sessionFactory.getCurrentSession();
+		Account oldAccount = session.get(Account.class, account.getId());
+		Iterator<Withdraw> iterator = account.getWithdraw().iterator();
+		Withdraw newWithdraw = iterator.next();
+		oldAccount.getWithdraw().add(newWithdraw);
+		oldAccount.setBalance(oldAccount.getBalance()-newWithdraw.getWithdraw_amount());
+		try {
+			session.update(oldAccount);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		return oldAccount;
 	}
 }

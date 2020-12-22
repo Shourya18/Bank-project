@@ -70,5 +70,10 @@ public class CustomerController {
 	 public Account getTransaction(@RequestBody Account account) {
 		 return dao.transactionDetail(account);
 	 }
+	 @PostMapping(path="/withdraw",consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
+	            produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	 public Account getWithdraw(@RequestBody Account account) {
+		 return dao.withdraw(account);
+	 }
 
 }

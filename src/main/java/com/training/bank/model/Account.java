@@ -32,6 +32,9 @@ public class Account {
 	List<Transaction>transaction;
 //	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 //	private Customer customer;
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL,targetEntity = Withdraw.class)
+	List<Withdraw>withdraw;
 	
 	public Long getId() {
 		return id;
@@ -96,6 +99,16 @@ public class Account {
 	public void setTransaction(List<Transaction> transaction) {
 		this.transaction = transaction;
 	}
+
+	public List<Withdraw> getWithdraw() {
+		return withdraw;
+	}
+
+	public void setWithdraw(List<Withdraw> withdraw) {
+		this.withdraw = withdraw;
+	}
+	
+	
 	
 //	public Customer getCustomer() {
 //		return customer;
