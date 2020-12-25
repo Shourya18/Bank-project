@@ -18,6 +18,8 @@ import com.training.bank.DAO.DAO;
 import com.training.bank.model.Account;
 import com.training.bank.model.Customer;
 import com.training.bank.model.Locker;
+import com.training.bank.model.Login;
+import com.training.bank.model.MiniStatement;
 
 @RestController
 @RequestMapping("/bank/v1")
@@ -33,6 +35,10 @@ public class CustomerController {
 	@GetMapping(path = "/customers")
 	public List<Customer> getAllCustomers() {
 		return dao.getCustomers();
+	}
+	@GetMapping(path = "/account/{id}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public Account getAccount(@PathVariable Long id) {
+		return dao.getAccountDetails(id);
 	}
 //	
 	@GetMapping(path = "/customer/{id}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
@@ -73,7 +79,16 @@ public class CustomerController {
 	 @PostMapping(path="/withdraw",consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
 	            produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	 public Account getWithdraw(@RequestBody Account account) {
+		 System.out.println(account.getWithdraw());
 		 return dao.withdraw(account);
 	 }
-
+	 @GetMapping(path = "/statement/{id}/{date}", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
+		public MiniStatement getAccount(@PathVariable("id") Long id,@PathVariable("date") String date) {
+			return dao.getStatement(id, date);
+	 }
+	 @PostMapping(path="/login")
+	 public Customer Login(@RequestBody Login login) {
+		 return dao.signIn(login);
+	 }
 }
+	 

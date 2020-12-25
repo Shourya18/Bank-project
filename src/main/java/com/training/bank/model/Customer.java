@@ -25,9 +25,11 @@ public class Customer {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date dob;
 	private String email;
+	private String password;
 	private String mobile;
 	private String aadharNo;
 	private String address;
+	private String role;
 	private boolean locker;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,targetEntity = Account.class)
 	private List<Account> account = new ArrayList<Account>();
@@ -88,6 +90,18 @@ public class Customer {
 	}
 	public void setAccount(List<Account> account) {
 		this.account = account;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

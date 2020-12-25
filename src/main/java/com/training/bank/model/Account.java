@@ -32,9 +32,10 @@ public class Account {
 	List<Transaction>transaction;
 //	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 //	private Customer customer;
-	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL,targetEntity = Withdraw.class)
 	List<Withdraw>withdraw;
+	@OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL,targetEntity = Deposit.class)
+	List<Deposit>deposit;
 	
 	public Long getId() {
 		return id;
@@ -107,6 +108,15 @@ public class Account {
 	public void setWithdraw(List<Withdraw> withdraw) {
 		this.withdraw = withdraw;
 	}
+
+	public List<Deposit> getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(List<Deposit> deposit) {
+		this.deposit = deposit;
+	}
+	
 	
 	
 	

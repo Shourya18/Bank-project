@@ -1,9 +1,13 @@
 package com.training.bank.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Transaction {
@@ -15,6 +19,8 @@ public class Transaction {
 	private String transferType;
 	private String ifsc;
 	private Double amount;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private Date date;
 	public Long getTrans_id() {
 		return trans_id;
 	}
@@ -45,6 +51,12 @@ public class Transaction {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 	
 }
